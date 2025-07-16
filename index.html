@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carbon Footprint Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f5f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .section {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #ffffff;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #totalResult, #summary {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+    #summary {
+      margin-top: 30px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Carbon Footprint Calculator</h1>
+
+  <div class="section">
+    <h3>Business Travel</h3>
+    <label for="travel_km">Kilometers Traveled:</label>
+    <input type="number" id="travel_km" placeholder="e.g. 1000" />
+  </div>
+
+  <div class="section">
+    <h3>Marketing Expenses</h3>
+    <label for="marketing_spend">Amount Spent ($):</label>
+    <input type="number" id="marketing_spend" placeholder="e.g. 500" />
+  </div>
+
+  <div class="section">
+    <h3>Fluorinated Gases</h3>
+    <label for="gas_kg">Fluorinated Gas (kg):</label>
+    <input type="number" id="gas_kg" placeholder="e.g. 10" />
+  </div>
+
+  <div class="section">
+    <h3>Basic Utilities</h3>
+    <label for="electricity_kwh">Electricity Usage (kWh):</label>
+    <input type="number" id="electricity_kwh" placeholder="e.g. 250" />
+  </div>
+
+  <div class="section" style="text-align: center;">
+    <button onclick="calculateEmissions()">Calculate Emissions</button>
+  </div>
+
+  <div id="totalResult"></div>
+  <div id="summary"></div>
+
+  <script>
+    function calculateEmissions() {
+      const travel_km = parseFloat(document.getElementById('travel_km').value) || 0;
+      const marketing_spend = parseFloat(document.getElementById('marketing_spend').value) || 0;
+      const gas_kg = parseFloat(document.getElementById('gas_kg').value) || 0;
+      const electricity_kwh = parseFloat(document.getElementById('electricity_kwh').value) || 0;
+
+      const travel_factor = 0.21;
+      const marketing_factor = 0.05;
+      const gas_factor = 675;
+      const electricity_factor = 0.85;
+
+      const travel_emission = travel_km * travel_factor;
+      const marketing_emission = marketing_spend * marketing_factor;
+      const gas_emission = gas_kg * gas_factor;
+      const electricity_emission = electricity_kwh * electricity_factor;
+
+      const total = travel_emission + marketing_emission + gas_emission + electricity_emission;
+
+      document.getElementById('totalResult').innerText = `Total Carbon Emissions: ${total.toFixed(2)} kg CO₂e`;
+
+      document.getElementById('summary').innerHTML = `
+        <p>Breakdown:</p>
+        <p>Business Travel: ${travel_emission.toFixed(2)} kg CO₂e</p>
+        <p>Marketing Expenses: ${marketing_emission.toFixed(2)} kg CO₂e</p>
+        <p>Fluorinated Gases: ${gas_emission.toFixed(2)} kg CO₂e</p>
+        <p>Electricity Usage: ${electricity_emission.toFixed(2)} kg CO₂e</p>
+      `;
+    }
+  </script>
+</body>
+</html>
