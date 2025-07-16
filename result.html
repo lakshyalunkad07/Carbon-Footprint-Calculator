@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Total Emission Summary</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .summary-box {
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .summary-box h3 {
+      color: #007b5e;
+      margin-bottom: 10px;
+    }
+
+    .emission-line {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .total {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #c1121f;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #0077b6;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #023e8a;
+    }
+  </style>
+</head>
+<body>
+  <h2>Total Emission Summary</h2>
+  <div class="summary-box">
+    <div class="emission-line" id="commonEmission">Common: ...</div>
+    <div class="emission-line" id="fluorinatedEmission">Fluorinated Gases: ...</div>
+    <div class="emission-line" id="travelEmission">Business Travel: ...</div>
+    <div class="emission-line" id="marketingEmission">Marketing: ...</div>
+    <div class="total" id="totalEmission">Total Emission: ...</div>
+
+    <button onclick="resetData()">🔄 Reset Data</button>
+  </div>
+
+  <script>
+    function loadEmissions() {
+      const common = parseFloat(localStorage.getItem('commonTotal')) || 0;
+      const fluorinated = parseFloat(localStorage.getItem('fluorinatedTotal')) || 0;
+      const travel = parseFloat(localStorage.getItem('travelTotal')) || 0;
+      const marketing = parseFloat(localStorage.getItem('marketingTotal')) || 0;
+
+      document.getElementById('commonEmission').innerText = `Common: ${common.toFixed(2)} kg CO₂`;
+      document.getElementById('fluorinatedEmission').innerText = `Fluorinated Gases: ${fluorinated.toFixed(2)} kg CO₂`;
+      document.getElementById('travelEmission').innerText = `Business Travel: ${travel.toFixed(2)} kg CO₂`;
+      document.getElementById('marketingEmission').innerText = `Marketing: ${marketing.toFixed(2)} kg CO₂`;
+
+      const total = common + fluorinated + travel + marketing;
+      document.getElementById('totalEmission').innerText = `Total Emission: ${total.toFixed(2)} kg CO₂`;
+    }
+
+    function resetData() {
+      localStorage.removeItem('commonTotal');
+      localStorage.removeItem('fluorinatedTotal');
+      localStorage.removeItem('travelTotal');
+      localStorage.removeItem('marketingTotal');
+      alert('✅ All saved emission data has been reset.');
+      location.reload();
+    }
+
+    loadEmissions();
+  </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Travel Emissions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #f0f8ff, #d2eaff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #00509e;
+      margin: 30px 0 20px;
+      font-size: 2rem;
+    }
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+    .item {
+      margin: 20px 0;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #003f88;
+    }
+    input[type="number"] {
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #00509e;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #002b5c;
+    }
+  </style>
+</head>
+<body>
+  <h2>Business Travel Emissions</h2>
+  <div class="form-container">
+    <div class="item">
+      <label for="hybrid">Hybrid (km)</label>
+      <input type="number" id="hybrid" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="gasoline">Average Gasoline Car (km)</label>
+      <input type="number" id="gasoline" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="fourwheel">Four Wheel Drive (km)</label>
+      <input type="number" id="fourwheel" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="longhaul">Long Haul Flight (km)</label>
+      <input type="number" id="longhaul" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="shorthail">Short Haul Flight (km)</label>
+      <input type="number" id="shorthail" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="hsrail">High-Speed Rail (km)</label>
+      <input type="number" id="hsrail" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="electrictrain">Electric Train (km)</label>
+      <input type="number" id="electrictrain" placeholder="Enter distance">
+    </div>
+    <div class="item">
+      <label for="dieseltrain">Diesel Train (km)</label>
+      <input type="number" id="dieseltrain" placeholder="Enter distance">
+    </div>
+    <button onclick="saveTravelData()">💾 Save and Return</button>
+  </div>
+
+  <script>
+    function saveTravelData() {
+      const hybrid = parseFloat(document.getElementById('hybrid').value) || 0;
+      const gasoline = parseFloat(document.getElementById('gasoline').value) || 0;
+      const fourwheel = parseFloat(document.getElementById('fourwheel').value) || 0;
+      const longhaul = parseFloat(document.getElementById('longhaul').value) || 0;
+      const shorthail = parseFloat(document.getElementById('shorthail').value) || 0;
+      const hsrail = parseFloat(document.getElementById('hsrail').value) || 0;
+      const electrictrain = parseFloat(document.getElementById('electrictrain').value) || 0;
+      const dieseltrain = parseFloat(document.getElementById('dieseltrain').value) || 0;
+
+      const totalEmission =
+        (hybrid * 0.09) +
+        (gasoline * 0.19) +
+        (fourwheel * 0.25) +
+        (longhaul * 0.11) +
+        (shorthail * 0.15) +
+        (hsrail * 0.04) +
+        (electrictrain * 0.02) +
+        (dieseltrain * 0.06);
+
+      localStorage.setItem('travelTotal', totalEmission);
+      alert("✅ Business travel emissions saved!");
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
