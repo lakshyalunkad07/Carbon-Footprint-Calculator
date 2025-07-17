@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commercial Carbon Footprint Calculator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 50px 20px;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #00695c;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px;
+      align-items: center;
+    }
+
+    .buttons a button {
+      width: 100%;
+      height: 60px;
+      padding: 0 15px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background-color: #26a69a;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .buttons a button:hover {
+      background-color: #00796b;
+    }
+
+    .total-button {
+      background-color: red !important;
+    }
+
+    .total-button:hover {
+      background-color: darkred !important;
+    }
+  </style>
+</head>
+<body>
+  <h1>Commercial Carbon Footprint Calculator</h1>
+
+  <div class="buttons">
+    <a href="common.html"><button>Common Emissions</button></a>
+    <a href="fluorinated.html"><button>Fluorinated Gases</button></a>
+    <a href="travel.html"><button>Business Travel</button></a>
+    <a href="marketing.html"><button>Marketing Expenses</button></a>
+    <a href="result.html"><button class="total-button">🔎 Total Emission</button></a>
+  </div>
+</body>
+</html>
