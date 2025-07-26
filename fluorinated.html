@@ -3,141 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fluorinated Gases Emissions</title>
+  <title>Commercial Carbon Footprint Calculator</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #e6f7ff, #b3e0ff);
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url('background.jpg'); /* make sure this matches your file name */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.85); /* slight white background for readability */
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #00695c;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
-    h2 {
-      color: #0077b6;
-      margin: 30px 0 20px;
-      font-size: 2rem;
-    }
-    .form-container {
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 600px;
-    }
-    .item {
-      margin: 20px 0;
-    }
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 8px;
-      color: #023e8a;
-    }
-    input[type="number"] {
-      padding: 10px;
+      gap: 15px;
       width: 100%;
-      border: 1px solid #cbd5e0;
-      border-radius: 6px;
-      font-size: 16px;
+      max-width: 300px;
+      margin: 0 auto;
     }
+
+    .button-link {
+      text-decoration: none;
+    }
+
     button {
-      background-color: #0077b6;
-      color: white;
-      border: none;
-      padding: 14px 25px;
+      width: 100%;
+      height: 50px;
       font-size: 16px;
       font-weight: bold;
+      border: none;
       border-radius: 8px;
+      background-color: #26a69a;
+      color: white;
       cursor: pointer;
-      margin-top: 20px;
-      width: 100%;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #023e8a;
+      background-color: #00796b;
+    }
+
+    .total-button {
+      background-color: red;
+    }
+
+    .total-button:hover {
+      background-color: darkred;
     }
   </style>
 </head>
 <body>
-  <h2>Fluorinated Gases Emissions</h2>
 
-  <div class="form-container">
-    <div class="item">
-      <label for="hfc134a">HFC-134a (kg)</label>
-      <input type="number" id="hfc134a" placeholder="Enter quantity">
+  <div class="container">
+    <h1>Commercial Carbon Footprint Calculator</h1>
+    <div class="buttons">
+      <a class="button-link" href="common.html"><button>Common Emissions</button></a>
+      <a class="button-link" href="fluorinated.html"><button>Fluorinated Gases</button></a>
+      <a class="button-link" href="travel.html"><button>Business Travel</button></a>
+      <a class="button-link" href="marketing.html"><button>Marketing Expenses</button></a>
+      <a class="button-link" href="result.html"><button class="total-button">🔎 Total Emission</button></a>
     </div>
-
-    <div class="item">
-      <label for="hfc23">HFC-23 (kg)</label>
-      <input type="number" id="hfc23" placeholder="Enter quantity">
-    </div>
-
-    <div class="item">
-      <label for="hfc152a">HFC-152a (kg)</label>
-      <input type="number" id="hfc152a" placeholder="Enter quantity">
-    </div>
-
-    <div class="item">
-      <label for="pfc14">PFC-14 (CF₄) (kg)</label>
-      <input type="number" id="pfc14" placeholder="Enter quantity">
-    </div>
-
-    <div class="item">
-      <label for="sf6">SF₆ (kg)</label>
-      <input type="number" id="sf6" placeholder="Enter quantity">
-    </div>
-
-    <div class="item">
-      <label for="hfc32">HFC-32 (kg)</label>
-      <input type="number" id="hfc32" placeholder="Enter quantity">
-    </div>
-
-    <div class="item">
-      <label for="nf3">NF₃ (Nitrogen trifluoride) (kg)</label>
-      <input type="number" id="nf3" placeholder="Enter quantity">
-    </div>
-
-    <button onclick="saveFluorinatedData()">💾 Save and Return</button>
   </div>
 
-  <script>
-    function saveFluorinatedData() {
-      const hfc134a = parseFloat(document.getElementById('hfc134a').value) || 0;
-      const hfc23 = parseFloat(document.getElementById('hfc23').value) || 0;
-      const hfc152a = parseFloat(document.getElementById('hfc152a').value) || 0;
-      const pfc14 = parseFloat(document.getElementById('pfc14').value) || 0;
-      const sf6 = parseFloat(document.getElementById('sf6').value) || 0;
-      const hfc32 = parseFloat(document.getElementById('hfc32').value) || 0;
-      const nf3 = parseFloat(document.getElementById('nf3').value) || 0;
-
-      const totalEmission =
-        (hfc134a * 1430) +
-        (hfc23 * 12400) +
-        (hfc152a * 138) +
-        (pfc14 * 7390) +
-        (sf6 * 22800) +
-        (hfc32 * 675) +
-        (nf3 * 17200);
-
-      const fluorinatedData = {
-        hfc134a,
-        hfc23,
-        hfc152a,
-        pfc14,
-        sf6,
-        hfc32,
-        nf3,
-        totalEmission
-      };
-
-      localStorage.setItem('fluorinatedData', JSON.stringify(fluorinatedData));
-      localStorage.setItem('fluorinatedTotal', totalEmission);
-      alert("✅ Fluorinated gases emissions saved!");
-      window.location.href = 'index.html';
-    }
-  </script>
 </body>
 </html>
