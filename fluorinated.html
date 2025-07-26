@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fluorinated Gases Emissions</title>
   <style>
     body {
@@ -122,6 +122,18 @@
         (hfc32 * 675) +
         (nf3 * 17200);
 
+      const fluorinatedData = {
+        hfc134a,
+        hfc23,
+        hfc152a,
+        pfc14,
+        sf6,
+        hfc32,
+        nf3,
+        totalEmission
+      };
+
+      localStorage.setItem('fluorinatedData', JSON.stringify(fluorinatedData));
       localStorage.setItem('fluorinatedTotal', totalEmission);
       alert("✅ Fluorinated gases emissions saved!");
       window.location.href = 'index.html';
