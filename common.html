@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Common Emissions</title>
   <style>
     body {
@@ -136,7 +136,21 @@
         (chemicals * 3.5) +
         (waste * 0.21);
 
-      localStorage.setItem('commonTotal', totalEmission);
+      const data = {
+        electricity,
+        naturalGas,
+        diesel,
+        paper,
+        toner,
+        commute,
+        water,
+        chemicals,
+        waste,
+        totalEmission: parseFloat(totalEmission.toFixed(3))
+      };
+
+      localStorage.setItem('commonData', JSON.stringify(data));
+
       alert("✅ Common emissions saved successfully!");
       window.location.href = 'index.html';
     }
