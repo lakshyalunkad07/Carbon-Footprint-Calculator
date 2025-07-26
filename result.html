@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emission Result</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      letter-spacing: 5px;
+    }
+
+    .report-section {
+      margin: 20px 0;
+      font-size: 20px;
+      letter-spacing: 3px;
+    }
+
+    .total {
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      margin-top: 40px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Carbon Emission Summary Report</h1>
+
+  <div class="report-section" id="common"></div>
+  <div class="report-section" id="fluorinated"></div>
+  <div class="report-section" id="travel"></div>
+  <div class="report-section" id="marketing"></div>
+  <div class="report-section total" id="total"></div>
+
+  <button onclick="generatePDF()">Generate PDF</button>
+
+  <script>
+    // Load emission values from localStorage
+    function loadEmissions() {
+      const common = parseFloat(localStorage.getItem('commonEmissions') || '0');
+      const fluorinated = parseFloat(localStorage.getItem('fluorinatedEmissions') || '0');
+      const travel = parseFloat(localStorage.getItem('travelEmissions') || '0');
+      const marketing = parseFloat(localStorage.getItem('marketingEmissions') || '0');
+      const total = common + fluorinated + travel + marketing;
+
+      document.getElementById("common").innerText = `Common: ${common.toFixed(2)} kg CO₂`;
+      document.getElementById("fluorinated").innerText = `Fluorinated Gases: ${fluorinated.toFixed(2)} kg CO₂`;
+      document.getElementById("travel").innerText = `Business Travel: ${travel.toFixed(2)} kg CO₂`;
+      document.getElementById("marketing").innerText = `Marketing: ${marketing.toFixed(2)} kg CO₂`;
+      document.getElementById("total").innerText = `Total Emission: ${total.toFixed(2)} kg CO₂`;
+
+      return { common, fluorinated, travel, marketing, total };
+    }
+
+    // Reset values after PDF generation
+    function resetEmissions() {
+      localStorage.removeItem('commonEmissions');
+      localStorage.removeItem('fluorinatedEmissions');
+      localStorage.removeItem('travelEmissions');
+      localStorage.removeItem('marketingEmissions');
+    }
+
+    // Generate PDF and clear data
+    function generatePDF() {
+      const { common, fluorinated, travel, marketing, total } = loadEmissions();
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(22);
+      doc.text("Carbon Emission Summary Report", 20, 20);
+
+      doc.setFontSize(16);
+      doc.text(`Common: ${common.toFixed(2)} kg CO₂`, 20, 40);
+      doc.text(`Fluorinated Gases: ${fluorinated.toFixed(2)} kg CO₂`, 20, 50);
+      doc.text(`Business Travel: ${travel.toFixed(2)} kg CO₂`, 20, 60);
+      doc.text(`Marketing: ${marketing.toFixed(2)} kg CO₂`, 20, 70);
+
+      doc.setTextColor(255, 0, 0);
+      doc.text(`Total Emission: ${total.toFixed(2)} kg CO₂`, 20, 90);
+
+      doc.save("carbon_emission_report.pdf");
+
+      resetEmissions();
+      setTimeout(() => {
+        location.reload();
+      }, 300);
+    }
+
+    loadEmissions();
+  </script>
+
+</body>
+</html>
+
