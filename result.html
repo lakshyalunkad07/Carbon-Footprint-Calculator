@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carbon Emission Result</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+    #report {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      color: darkred;
+      margin-top: 20px;
+    }
+    #generate-pdf {
+      display: block;
+      margin: 30px auto 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #generate-pdf:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div id="report">
+  <h2>Carbon Emission Summary Report</h2>
+  <p id="common">Common: 0.00 kg CO2</p>
+  <p id="fluorinated">Fluorinated Gases: 0.00 kg CO2</p>
+  <p id="travel">Business Travel: 0.00 kg CO2</p>
+  <p id="marketing">Marketing: 0.00 kg CO2</p>
+  <p class="total" id="total">Total Emission: 0.00 kg CO2</p>
+</div>
+
+<button id="generate-pdf">Download PDF</button>
+
+<script>
+  // Get values from localStorage and display
+  const common = parseFloat(localStorage.getItem('commonEmissions')) || 0;
+  const fluorinated = parseFloat(localStorage.getItem('fluorinatedEmissions')) || 0;
+  const travel = parseFloat(localStorage.getItem('travelEmissions')) || 0;
+  const marketing = parseFloat(localStorage.getItem('marketingEmissions')) || 0;
+  const total = common + fluorinated + travel + marketing;
+
+  document.getElementById("common").textContent = `Common: ${common.toFixed(2)} kg CO2`;
+  document.getElementById("fluorinated").textContent = `Fluorinated Gases: ${fluorinated.toFixed(2)} kg CO2`;
+  document.getElementById("travel").textContent = `Business Travel: ${travel.toFixed(2)} kg CO2`;
+  document.getElementById("marketing").textContent = `Marketing: ${marketing.toFixed(2)} kg CO2`;
+  document.getElementById("total").textContent = `Total Emission: ${total.toFixed(2)} kg CO2`;
+
+  // PDF Generation
+  document.getElementById("generate-pdf").addEventListener("click", () => {
+    const element = document.getElementById("report");
+    const options = {
+      margin:       0.5,
+      filename:     "Carbon_Emission_Report.pdf",
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().from(element).set(options).save();
+  });
+</script>
+
+</body>
+</html>
