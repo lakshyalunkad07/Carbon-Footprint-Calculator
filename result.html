@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Total Emission Result</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+    }
+    h2 {
+      color: #b30000;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    #resetBtn {
+      background-color: #007BFF;
+      color: white;
+    }
+    #returnBtn {
+      background-color: #444;
+      color: white;
+    }
+    #generateBtn {
+      background-color: #007BFF;
+      color: white;
+    }
+    #pdfContent {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="pdfContent">
+    <p id="commonEmission"></p>
+    <p id="fluorinatedEmission"></p>
+    <p id="businessEmission"></p>
+    <p id="marketingEmission"></p>
+    <h2 id="totalEmission"></h2>
+  </div>
+
+  <!-- Buttons (excluded from PDF) -->
+  <button id="resetBtn">Reset Data</button>
+  <button id="returnBtn" onclick="location.href='index.html'">Return to Calculator</button>
+  <button id="generateBtn">Generate PDF</button>
+
+  <script>
+    // Load emissions from localStorage
+    const common = parseFloat(localStorage.getItem('common') || 0).toFixed(2);
+    const fluorinated = parseFloat(localStorage.getItem('fluorinated') || 0).toFixed(2);
+    const business = parseFloat(localStorage.getItem('business') || 0).toFixed(2);
+    const marketing = parseFloat(localStorage.getItem('marketing') || 0).toFixed(2);
+    const total = (parseFloat(common) + parseFloat(fluorinated) + parseFloat(business) + parseFloat(marketing)).toFixed(2);
+
+    // Display results
+    document.getElementById('commonEmission').textContent = `Common: ${common} kg CO\u2082`;
+    document.getElementById('fluorinatedEmission').textContent = `Fluorinated Gases: ${fluorinated} kg CO\u2082`;
+    document.getElementById('businessEmission').textContent = `Business Travel: ${business} kg CO\u2082`;
+    document.getElementById('marketingEmission').textContent = `Marketing: ${marketing} kg CO\u2082`;
+    document.getElementById('totalEmission').innerHTML = `Total Emission: <strong>${total} kg CO\u2082</strong>`;
+
+    // Generate PDF
+    document.getElementById("generateBtn").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const text = [
+        `Common: ${common} kg CO2`,
+        `Fluorinated Gases: ${fluorinated} kg CO2`,
+        `Business Travel: ${business} kg CO2`,
+        `Marketing: ${marketing} kg CO2`,
+        `Total Emission: ${total} kg CO2`
+      ];
+
+      doc.setFontSize(14);
+      text.forEach((line, index) => {
+        doc.text(line, 20, 30 + index * 10);
+      });
+
+      doc.save("Carbon_Emission_Summary.pdf");
+
+      // Reset after PDF generation
+      localStorage.removeItem('common');
+      localStorage.removeItem('fluorinated');
+      localStorage.removeItem('business');
+      localStorage.removeItem('marketing');
+    });
+
+    // Reset Data
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      localStorage.removeItem('common');
+      localStorage.removeItem('fluorinated');
+      localStorage.removeItem('business');
+      localStorage.removeItem('marketing');
+      location.reload(); // Refresh to show 0 values
+    });
+  </script>
+</body>
+</html>
