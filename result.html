@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Total Emissions Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fff;
+      padding: 40px;
+    }
+
+    .section {
+      font-size: 20px;
+      margin: 10px 0;
+    }
+
+    .total {
+      font-size: 24px;
+      color: darkred;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    #generate-pdf {
+      margin-top: 40px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #generate-pdf:hover {
+      background-color: #005a9e;
+    }
+
+    .co2 {
+      vertical-align: sub;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="pdf-content">
+    <div class="section">Common: <span id="common-emission">21928.39</span> kg CO<span class="co2">2</span></div>
+    <div class="section">Fluorinated Gases: <span id="fluorinated-emission">0.00</span> kg CO<span class="co2">2</span></div>
+    <div class="section">Business Travel: <span id="travel-emission">0.00</span> kg CO<span class="co2">2</span></div>
+    <div class="section">Marketing: <span id="marketing-emission">0.00</span> kg CO<span class="co2">2</span></div>
+    <div class="total">Total Emission: <span id="total-emission">21928.39</span> kg CO<span class="co2">2</span></div>
+  </div>
+
+  <button id="generate-pdf">Generate PDF</button>
+
+  <!-- html2pdf.js from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    document.getElementById('generate-pdf').addEventListener('click', function () {
+      const element = document.getElementById('pdf-content');
+      const opt = {
+        margin:       0.5,
+        filename:     'Total_Emissions_Report.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    });
+  </script>
+
+</body>
+</html>
