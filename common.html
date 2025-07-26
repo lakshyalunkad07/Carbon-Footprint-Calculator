@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Common Emissions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #f0fff4, #c6f6d5);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #2f855a;
+      margin: 30px 0 20px;
+      font-size: 2rem;
+    }
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+    .item {
+      margin: 20px 0;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #2d3748;
+    }
+    input[type="number"] {
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #38a169;
+      color: white;
+      border: none;
+      padding: 14px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #2f855a;
+    }
+  </style>
+</head>
+<body>
+  <h2>Common Emissions</h2>
+
+  <div class="form-container">
+    <div class="item">
+      <label for="electricity">Electricity (kWh)</label>
+      <input type="number" id="electricity" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="naturalGas">Natural Gas (m³)</label>
+      <input type="number" id="naturalGas" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="diesel">Diesel Generator Fuel (litres)</label>
+      <input type="number" id="diesel" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="paper">Office Paper (A4) (kg)</label>
+      <input type="number" id="paper" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="toner">Laser Printer Toner (cartridges)</label>
+      <input type="number" id="toner" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="commute">Staff Commuting (Company Cars) (km)</label>
+      <input type="number" id="commute" placeholder="Enter distance in km">
+    </div>
+
+    <div class="item">
+      <label for="water">Water (municipal supply) (litres)</label>
+      <input type="number" id="water" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="chemicals">Cleaning Chemicals (kg)</label>
+      <input type="number" id="chemicals" placeholder="Enter quantity">
+    </div>
+
+    <div class="item">
+      <label for="waste">General Office Waste (kg)</label>
+      <input type="number" id="waste" placeholder="Enter quantity">
+    </div>
+
+    <button onclick="saveCommonData()">💾 Save and Return</button>
+  </div>
+
+  <script>
+    function saveCommonData() {
+      const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+      const naturalGas = parseFloat(document.getElementById('naturalGas').value) || 0;
+      const diesel = parseFloat(document.getElementById('diesel').value) || 0;
+      const paper = parseFloat(document.getElementById('paper').value) || 0;
+      const toner = parseFloat(document.getElementById('toner').value) || 0;
+      const commute = parseFloat(document.getElementById('commute').value) || 0;
+      const water = parseFloat(document.getElementById('water').value) || 0;
+      const chemicals = parseFloat(document.getElementById('chemicals').value) || 0;
+      const waste = parseFloat(document.getElementById('waste').value) || 0;
+
+      const totalEmission =
+        (electricity * 0.82) +
+        (naturalGas * 5.3) +
+        (diesel * 2.68) +
+        (paper * 1.37) +
+        (toner * 6) +
+        (commute * 0.21) +
+        (water * 0.00054) +
+        (chemicals * 3.5) +
+        (waste * 0.21);
+
+      localStorage.setItem('commonTotal', totalEmission);
+      alert("✅ Common emissions saved successfully!");
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
