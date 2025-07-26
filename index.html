@@ -2,94 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Commercial Carbon Footprint Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketing Emissions</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: url('background.jpg'); /* make sure this matches your file name */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .container {
-      background-color: rgba(255, 255, 255, 0.85);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: #00695c;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
+      background: linear-gradient(to bottom right, #fff5e6, #ffe0b3);
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h2 {
+      color: #cc7000;
+      margin: 30px 0 20px;
+      font-size: 2rem;
+    }
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+    .item {
+      margin: 20px 0;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #994d00;
+    }
+    input[type="number"] {
+      padding: 10px;
       width: 100%;
-      max-width: 300px;
-      margin: 0 auto;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      font-size: 16px;
     }
-
-    .button-link {
-      text-decoration: none;
-    }
-
     button {
-      width: 100%;
-      height: 50px;
+      background-color: #cc7000;
+      color: white;
+      border: none;
+      padding: 14px 25px;
       font-size: 16px;
       font-weight: bold;
-      border: none;
       border-radius: 8px;
-      background-color: #26a69a;
-      color: white;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      margin-top: 20px;
+      width: 100%;
     }
-
     button:hover {
-      background-color: #00796b;
-    }
-
-    .total-button {
-      background-color: red;
-    }
-
-    .total-button:hover {
-      background-color: darkred;
+      background-color: #994d00;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <h1>Commercial Carbon Footprint Calculator</h1>
-    <div class="buttons">
-      <a class="button-link" href="common.html"><button>Common Emissions</button></a>
-      <a class="button-link" href="fluorinated.html"><button>Fluorinated Gases</button></a>
-      <a class="button-link" href="travel.html"><button>Business Travel</button></a>
-      <a class="button-link" href="marketing.html"><button>Marketing Expenses</button></a>
-      <a class="button-link" href="result.html"><button class="total-button">🔎 Total Emission</button></a>
-      <a class="button-link" href="pdf.html"><button style="background-color: #007bff;">📄 Generate PDF Summary</button></a>
+  <h2>Marketing Emissions</h2>
+  <div class="form-container">
+    <div class="item">
+      <label for="googleads">Google Ads (₹)</label>
+      <input type="number" id="googleads" placeholder="Enter amount">
     </div>
+    <div class="item">
+      <label for="socialads">Facebook/Instagram Ads (₹)</label>
+      <input type="number" id="socialads" placeholder="Enter amount">
+    </div>
+    <div class="item">
+      <label for="newspaper">Newspaper Inserts (kg)</label>
+      <input type="number" id="newspaper" placeholder="Enter quantity">
+    </div>
+    <div class="item">
+      <label for="flyers">Flyers/Posters (kg)</label>
+      <input type="number" id="flyers" placeholder="Enter quantity">
+    </div>
+    <div class="item">
+      <label for="banners">Banners (kg)</label>
+      <input type="number" id="banners" placeholder="Enter quantity">
+    </div>
+    <div class="item">
+      <label for="brochures">Brochures (kg)</label>
+      <input type="number" id="brochures" placeholder="Enter quantity">
+    </div>
+    <div class="item">
+      <label for="pens">Branded Pens (units)</label>
+      <input type="number" id="pens" placeholder="Enter quantity">
+    </div>
+    <div class="item">
+      <label for="notebooks">Notebooks (units)</label>
+      <input type="number" id="notebooks" placeholder="Enter quantity">
+    </div>
+    <div class="item">
+      <label for="sponsored">Sponsored Posts (₹)</label>
+      <input type="number" id="sponsored" placeholder="Enter amount">
+    </div>
+    <div class="item">
+      <label for="vehicle">Promotional Vehicle Use (km)</label>
+      <input type="number" id="vehicle" placeholder="Enter distance">
+    </div>
+    <button onclick="saveMarketingData()">💾 Save and Return</button>
   </div>
 
+  <script>
+    function saveMarketingData() {
+      const googleads = parseFloat(document.getElementById('googleads').value) || 0;
+      const socialads = parseFloat(document.getElementById('socialads').value) || 0;
+      const newspaper = parseFloat(document.getElementById('newspaper').value) || 0;
+      const flyers = parseFloat(document.getElementById('flyers').value) || 0;
+      const banners = parseFloat(document.getElementById('banners').value) || 0;
+      const brochures = parseFloat(document.getElementById('brochures').value) || 0;
+      const pens = parseFloat(document.getElementById('pens').value) || 0;
+      const notebooks = parseFloat(document.getElementById('notebooks').value) || 0;
+      const sponsored = parseFloat(document.getElementById('sponsored').value) || 0;
+      const vehicle = parseFloat(document.getElementById('vehicle').value) || 0;
+
+      const totalEmission =
+        (googleads * 0.00012) +
+        (socialads * 0.00010) +
+        (newspaper * 2.5) +
+        (flyers * 1.8) +
+        (banners * 2.0) +
+        (brochures * 2.2) +
+        (pens * 0.4) +
+        (notebooks * 1.2) +
+        (sponsored * 0.00015) +
+        (vehicle * 0.18);
+
+      localStorage.setItem('marketingTotal', totalEmission);
+      alert("✅ Marketing emissions saved!");
+      window.location.href = 'index.html';
+    }
+  </script>
 </body>
 </html>
