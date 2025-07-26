@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Common Emissions</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluorinated Gases Emissions</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #f0fff4, #c6f6d5);
+      background: linear-gradient(to bottom right, #e6f7ff, #b3e0ff);
       margin: 0;
       padding: 0;
       display: flex;
@@ -16,7 +16,7 @@
       min-height: 100vh;
     }
     h2 {
-      color: #2f855a;
+      color: #0077b6;
       margin: 30px 0 20px;
       font-size: 2rem;
     }
@@ -35,7 +35,7 @@
       font-weight: 600;
       display: block;
       margin-bottom: 8px;
-      color: #2d3748;
+      color: #023e8a;
     }
     input[type="number"] {
       padding: 10px;
@@ -45,7 +45,7 @@
       font-size: 16px;
     }
     button {
-      background-color: #38a169;
+      background-color: #0077b6;
       color: white;
       border: none;
       padding: 14px 25px;
@@ -57,101 +57,73 @@
       width: 100%;
     }
     button:hover {
-      background-color: #2f855a;
+      background-color: #023e8a;
     }
   </style>
 </head>
 <body>
-  <h2>Common Emissions</h2>
+  <h2>Fluorinated Gases Emissions</h2>
 
   <div class="form-container">
     <div class="item">
-      <label for="electricity">Electricity (kWh)</label>
-      <input type="number" id="electricity" placeholder="Enter quantity">
+      <label for="hfc134a">HFC-134a (kg)</label>
+      <input type="number" id="hfc134a" placeholder="Enter quantity">
     </div>
 
     <div class="item">
-      <label for="naturalGas">Natural Gas (m³)</label>
-      <input type="number" id="naturalGas" placeholder="Enter quantity">
+      <label for="hfc23">HFC-23 (kg)</label>
+      <input type="number" id="hfc23" placeholder="Enter quantity">
     </div>
 
     <div class="item">
-      <label for="diesel">Diesel Generator Fuel (litres)</label>
-      <input type="number" id="diesel" placeholder="Enter quantity">
+      <label for="hfc152a">HFC-152a (kg)</label>
+      <input type="number" id="hfc152a" placeholder="Enter quantity">
     </div>
 
     <div class="item">
-      <label for="paper">Office Paper (A4) (kg)</label>
-      <input type="number" id="paper" placeholder="Enter quantity">
+      <label for="pfc14">PFC-14 (CF₄) (kg)</label>
+      <input type="number" id="pfc14" placeholder="Enter quantity">
     </div>
 
     <div class="item">
-      <label for="toner">Laser Printer Toner (cartridges)</label>
-      <input type="number" id="toner" placeholder="Enter quantity">
+      <label for="sf6">SF₆ (kg)</label>
+      <input type="number" id="sf6" placeholder="Enter quantity">
     </div>
 
     <div class="item">
-      <label for="commute">Staff Commuting (Company Cars) (km)</label>
-      <input type="number" id="commute" placeholder="Enter distance in km">
+      <label for="hfc32">HFC-32 (kg)</label>
+      <input type="number" id="hfc32" placeholder="Enter quantity">
     </div>
 
     <div class="item">
-      <label for="water">Water (municipal supply) (litres)</label>
-      <input type="number" id="water" placeholder="Enter quantity">
+      <label for="nf3">NF₃ (Nitrogen trifluoride) (kg)</label>
+      <input type="number" id="nf3" placeholder="Enter quantity">
     </div>
 
-    <div class="item">
-      <label for="chemicals">Cleaning Chemicals (kg)</label>
-      <input type="number" id="chemicals" placeholder="Enter quantity">
-    </div>
-
-    <div class="item">
-      <label for="waste">General Office Waste (kg)</label>
-      <input type="number" id="waste" placeholder="Enter quantity">
-    </div>
-
-    <button onclick="saveCommonData()">💾 Save and Return</button>
+    <button onclick="saveFluorinatedData()">💾 Save and Return</button>
   </div>
 
   <script>
-    function saveCommonData() {
-      const electricity = parseFloat(document.getElementById('electricity').value) || 0;
-      const naturalGas = parseFloat(document.getElementById('naturalGas').value) || 0;
-      const diesel = parseFloat(document.getElementById('diesel').value) || 0;
-      const paper = parseFloat(document.getElementById('paper').value) || 0;
-      const toner = parseFloat(document.getElementById('toner').value) || 0;
-      const commute = parseFloat(document.getElementById('commute').value) || 0;
-      const water = parseFloat(document.getElementById('water').value) || 0;
-      const chemicals = parseFloat(document.getElementById('chemicals').value) || 0;
-      const waste = parseFloat(document.getElementById('waste').value) || 0;
+    function saveFluorinatedData() {
+      const hfc134a = parseFloat(document.getElementById('hfc134a').value) || 0;
+      const hfc23 = parseFloat(document.getElementById('hfc23').value) || 0;
+      const hfc152a = parseFloat(document.getElementById('hfc152a').value) || 0;
+      const pfc14 = parseFloat(document.getElementById('pfc14').value) || 0;
+      const sf6 = parseFloat(document.getElementById('sf6').value) || 0;
+      const hfc32 = parseFloat(document.getElementById('hfc32').value) || 0;
+      const nf3 = parseFloat(document.getElementById('nf3').value) || 0;
 
       const totalEmission =
-        (electricity * 0.82) +
-        (naturalGas * 5.3) +
-        (diesel * 2.68) +
-        (paper * 1.37) +
-        (toner * 6) +
-        (commute * 0.21) +
-        (water * 0.00054) +
-        (chemicals * 3.5) +
-        (waste * 0.21);
+        (hfc134a * 1430) +
+        (hfc23 * 12400) +
+        (hfc152a * 138) +
+        (pfc14 * 7390) +
+        (sf6 * 22800) +
+        (hfc32 * 675) +
+        (nf3 * 17200);
 
-      const data = {
-        electricity,
-        naturalGas,
-        diesel,
-        paper,
-        toner,
-        commute,
-        water,
-        chemicals,
-        waste,
-        totalEmission: parseFloat(totalEmission.toFixed(3))
-      };
-
-      localStorage.setItem('commonData', JSON.stringify(data));
-
-      alert("✅ Common emissions saved successfully!");
+      localStorage.setItem('fluorinatedTotal', totalEmission);
+      alert("✅ Fluorinated gases emissions saved!");
       window.location.href = 'index.html';
     }
   </script>
